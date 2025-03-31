@@ -2,11 +2,8 @@
 name: "Publish to Docker Hub"
 
 on:
-  push:
-    branches:
-      - master
-    tags:
-      - "*"
+  workflow_dispatch:
+
 
 jobs:
   publish_to_docker_hub:
@@ -20,7 +17,7 @@ jobs:
       - name: Prepare
         id: prep
         run: |
-          DOCKER_IMAGE=bropat/eufy-security-ws
+          DOCKER_IMAGE=fournierd/eufy-security-ws
           VERSION=noop
 
           if [[ $GITHUB_REF == refs/tags/* ]]; then
