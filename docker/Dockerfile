@@ -1,7 +1,7 @@
 FROM node:20-alpine3.18 AS build
 WORKDIR /tmp
 COPY . .
-RUN npm ci && npm run build
+RUN npm install --package-lock-only && npm ci && npm run build
 
 FROM node:20-alpine3.18 AS prod
 WORKDIR /tmp_prod
