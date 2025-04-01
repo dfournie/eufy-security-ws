@@ -4,7 +4,6 @@ name: "Publish to Docker Hub"
 on:
   workflow_dispatch:
 
-
 jobs:
   publish_to_docker_hub:
 
@@ -24,7 +23,7 @@ jobs:
             VERSION=${GITHUB_REF#refs/tags/}
           elif [[ $GITHUB_REF == refs/heads/dev ]]; then
             VERSION=dev
-          elif [[ $GITHUB_REF == refs/heads/master ]]; then
+          elif [[ $GITHUB_REF == refs/heads/main ]]; then
             VERSION=latest
           fi
 
@@ -56,6 +55,6 @@ jobs:
         with:
           context: .
           file: ./docker/Dockerfile
-          platforms: linux/amd64,linux/arm64
-          push: true
+          platforms: linux/amd64,linux/arm64,linux/arm/v6,linux/arm/v7
+          # push: true
           tags: ${{ steps.prep.outputs.tags }}
